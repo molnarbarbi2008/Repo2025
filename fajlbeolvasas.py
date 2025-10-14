@@ -23,7 +23,8 @@ except FileNotFoundError:
 
     """
     1.[] Megszámolás
-    2.[] Eldöntés 1/ Eldöntés 2
+    2.[] Eldöntés 1
+    Eldöntés 2
     3.[] Kiválasztás
     4.[] Keresés
     5.[] Sorozatszámítás
@@ -56,3 +57,28 @@ for i in range(1, len(verseny_adatok)):
 print(db, "versenyző nem szerzett még pontot!")
 
        
+
+#2. Van-e  Fernando nemű versenyző?
+i=0
+
+while (i<len(verseny_adatok) and 'Fernando' not in verseny_adatok[i]):
+    i=i+1
+if(i<len(verseny_adatok)):
+    print("Van!")
+    
+   
+   
+#Mindenki szerzett már kilencven pontot?
+i=0
+
+while(i<len(verseny_adatok) and int(verseny_adatok[i].split(",")[1])>=90):
+    i=i+1
+if(i<len(verseny_adatok)):
+    print("Nem mindenki!")
+        
+        
+    
+
+    
+
+
