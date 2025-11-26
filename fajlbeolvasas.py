@@ -22,13 +22,13 @@ except FileNotFoundError:
 
 
     """
-    1.[] Megszámolás
-    2.[] Eldöntés 1
+    1.[x] Megszámolás
+    2.[x] Eldöntés 1
     Eldöntés 2
-    3.[] Kiválasztás
-    4.[] Keresés
-    5.[] Sorozatszámítás
-    6.[] Minimum/maximum kiválasztás
+    3.[x] Kiválasztás
+    4.[x] Keresés
+    5.[x] Sorozatszámítás összegzés
+    6.[x] Minimum/maximum kiválasztás
     7.[] Másolás
     8.[] Kiválogatás
     9.[]Szétválogatás
@@ -68,13 +68,85 @@ if(i<len(verseny_adatok)):
     
    
    
-#Mindenki szerzett már kilencven pontot?
-i=0
+#2(2).Mindenki szerzett már kilencven pontot?
+i=1
 
 while(i<len(verseny_adatok) and int(verseny_adatok[i].split(",")[1])>=90):
     i=i+1
 if(i<len(verseny_adatok)):
     print("Nem mindenki!")
+    
+
+
+
+
+#3.melyik csapat tagja a Yuki Tsunoda?
+i=0
+while verseny_adatok[i].split(",")[0]!="Yuki Tsunoda":
+    i+=1
+print("Yuki Tsunoda a", verseny_adatok[i].split(",")[2])
+
+
+
+#4.kereses melyik cspatban van Pierre Gasly?
+i=1
+while i<len(verseny_adatok) and "Pierre Gasly" not in verseny_adatok[i]:
+    i=i+1
+if i<len(verseny_adatok):
+    print("Pierre Gasly", verseny_adatok[i].split(',')[2].strip(), "csapatbn van")
+else:
+    print("nincs")
+
+
+
+
+#5.adja meg a pontszamok átlagát
+S=0
+for i in range (1, len(verseny_adatok)):
+    S+=int(verseny_adatok[i].split(',')[1])
+print(f"A versenyzők pontszámának átlaga: {S/len(verseny_adatok)-1}")
+
+
+
+
+#6.kinek volt a legtöbb pontja?
+maxi=1
+maxertek=verseny_adatok[i].split(',')[1]
+
+
+for i in range(2, len(verseny_adatok)):
+    if(verseny_adatok[i]>verseny_adatok[maxi]):
+        maxi=i
+        maxertek=verseny_adatok[i].split(',')[1]
+print(f"A legnagyobb érték: {maxertek}")
+
+
+    
+    
+
+
+#8.versenyzők pontszáma alapján növekvő sorrenbe:
+for i in range(1, len(verseny_adatok)-1):
+    min=i
+    minertek=int(verseny_adatok[i].split(',')[1])
+    for j in range(i+1, len(verseny_adatok)):
+        if(int(verseny_adatok[j].split(',')[1])<int(verseny_adatok[min].split(',')[1])):
+            min=j
+            minertek=int(verseny_adatok[j].split(',')[1])
+    s=verseny_adatok[i]
+    verseny_adatok[i]=verseny_adatok[min]
+    verseny_adatok[min]=s
+for i in verseny_adatok:
+    print(i)
+      
+      
+      
+      
+      
+      
+      
+      
+      
         
         
     
