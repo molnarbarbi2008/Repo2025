@@ -15,6 +15,11 @@ def adatok_beolvasas(fajlnev):
         print("Hiba a fájl megnyitása közben!")
 
 
+
+
+
+
+
     """
     1. [X] Megszámolás
     2. [X] Eldöntés 1
@@ -36,7 +41,7 @@ def adatok_beolvasas(fajlnev):
         [] Minimum kiválasztásos
     """
 
-
+#ELJÁRÁS
 def pontatlanok():
 
 # 1. Hány versenyző nem szerzett még pontot?
@@ -49,72 +54,75 @@ def pontatlanok():
     print(f"{db} versenyző nem szerzett még pontot.\n")
 
 
-
-
-
-
-
-
-
-
-
-
-
+# ---------------------------------------------------------
+#FÜGGVÉNY
+def versenyzo_kereso(nev):
+    # 2.A Van-e Fernando nevű versenyző?
+    i = 0
+    while (i<len(verseny_adatok)and nev not in verseny_adatok[i]):
+        i=i+1
+    if (i<len(verseny_adatok)):
+        print("Van ilyen versenyző")
+    else:
+        print("Nincs ilyen versenyző")  
 
 # ---------------------------------------------------------
 
-""" # 1. Hány versenyző nem szerzett még pontot?
-db = 0
+#ELJÁRÁS
+def melyik_csapat(nev):
+    #4. melyik csapatban volt Pierre Gasly?
+    i=1
+    while i<len(verseny_adatok) and nev not in verseny_adatok[i]:
+        i=i+1
+    if i<len(verseny_adatok):
+        print(nev , " a(z)", verseny_adatok[i].split(",")[2].strip(), "csapatban van!:)")
+    else:
+        print("Nincs ilyen versenyző ezért egyik csapatban sincs bennt!:(")
 
-for i in range(1, len(verseny_adatok)):
-    if(int(verseny_adatok[i].split(',')[1]) == 0):
-        db = db + 1
 
-print(f"{db} versenyző nem szerzett még pontot.\n")
+#FÜGGVÉNY
+def istallo(csapatnev):
+#8. kik vannak a Mclaren istálloban
+    db1=0
+    masik_lista=[]
+    for i in range(2,len(verseny_adatok)):
+        if verseny_adatok[i].split(",")[2].strip()==csapatnev:
+            db1=db1+1
+            masik_lista.append(verseny_adatok[i].split(",")[0])
 
-# ---------------------------------------------------------
 
-# 2.A Van-e Fernando nevű versenyző?
-i = 0
-while (i<len(verseny_adatok)and "Fernando" not in verseny_adatok[i]):
-    i=i+1
-if (i<len(verseny_adatok)):
-    print("Van ilyen versenyző")
-else:
-    print("Nincs ilyen versenyző")  
+    return masik_lista
 
-# ---------------------------------------------------------
+#eljaras
+def kilencven(pont):
+    # 2.B Mindenki szerzett már 90 pontot?
+    i=1
+    while i<len(verseny_adatok) and int(verseny_adatok[i].split(",")[1])>=90:
+        i=i+1
+    if i==len(verseny_adatok):
+        print("van")
+    else:
+        print("nem")
 
-# 2.B Mindenki szerzett már 90 pontot?
-i=1
-while i<len(verseny_adatok) and int(verseny_adatok[i].split(",")[1])>=90:
-    i=i+1
-if i==len(verseny_adatok):
-    print("van")
-else:
-    print("nem")
 
+
+
+#eljaras
+def pilota(pilot):
+    3. #Melyik istálló pilotája a Yuki Tsunoda?
+    i=0
+    while verseny_adatok[i].split(",")[0]!=pilot:
+        i+=1
+    print(f"{pilot} a",verseny_adatok[i].split(",")[2])
+
+
+
+""" 
 # ---------------------------------------------------------    
-    
-3. #Melyik istálló pilotája a Yuki Tsunoda?
-i=0
-while verseny_adatok[i].split(",")[0]!="Yuki Tsunoda":
-    i+=1
-print("Yuki Tsunoda a",verseny_adatok[i].split(",")[2])
+ 
 
-# ---------------------------------------------------------
 
-#4. melyik csapatban volt Pierre Gasly?
-i=1
-while i<len(verseny_adatok) and "Pierre Gasly" not in verseny_adatok[i]:
-    i=i+1
-if i<len(verseny_adatok):
-    print("Pierre Gasly", verseny_adatok[i].split(",")[2].strip(), "csapatban van!:)")
-else:
-    print("Nincs ilyen versenyző ezért egyik csapatban sincs bennt!:(")
-
-# ---------------------------------------------------------
-
+ #eljaras
 #5. számolja ki a versenyzők pontszámainak átlagát
 S=0
 for i in range(1, len(verseny_adatok)):
@@ -144,17 +152,6 @@ print("A legkevesebb ponttal rendelkező versenyző: ",verseny_adatok[mini].spli
 
 # ---------------------------------------------------------
 
-#8. KIVÁLOGATÁS (másik listába)
-#kik vannak a Mclaren istálloban
-db1=0
-masik_lista=[]
-for i in range(2,len(verseny_adatok)):
-    if verseny_adatok[i].split(",")[2].strip()=="McLaren":
-        db1=db1+1
-        masik_lista.append(verseny_adatok[i].split(",")[0])
-print("Ezek a személyek vannak a Mclaren istálloban:",masik_lista)
-
-# ---------------------------------------------------------
 
 #9. SZÉTVÁLOGATÁS
 # kinek van kinek nincs pontja?
@@ -206,14 +203,43 @@ for i in range(1, len(verseny_adatok)-1):
 
 
 for i in verseny_adatok:
-    print(i)
+    print(i) 
+
  """
-
-
 #PROGRAM
 
-adatok_beolvasas(inputfajl)
 
+adatok_beolvasas(inputfajl)
+#1. F eljárás hívás
 pontatlanok()
 
+
+#2.F függvény hívás
+van_e=versenyzo_kereso("Fernando")
+if van_e:
+    print("Van Fernando")
+else:
+    print("Nincs Fernando")
+
+
+#4.F eljárás hívás
+melyik_csapat("Pierre Gasly")
+
+
+#8.F függvény hívás
+csapat_nev="McLaren"
+tag_lista=istallo("McLaren")
+print(f"Ezek a személyek vannak a {csapat_nev} istálloban: ")
+i=1
+for nev in tag_lista:
+    print(f"\t{i}.{nev:>30}#")
+    i+=1
+
+
+
+#2B
+kilencven(90)
+
+
+#
 print("ITT A PROGRAM VÉGE!")
